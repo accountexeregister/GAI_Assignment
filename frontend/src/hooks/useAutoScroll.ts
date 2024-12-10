@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useRef } from 'react';
+import { useEffect, useLayoutEffect, useRef } from "react";
 
 const SCROLL_THRESHOLD = 10;
 
@@ -9,11 +9,12 @@ function useAutoScroll(isActive: boolean) {
 
   useEffect(() => {
     const resizeObserver = new ResizeObserver(() => {
-      const { scrollHeight, clientHeight, scrollTop } = document.documentElement;
+      const { scrollHeight, clientHeight, scrollTop } =
+        document.documentElement;
       if (!isDisabled.current && scrollHeight - clientHeight > scrollTop) {
         document.documentElement.scrollTo({
           top: scrollHeight - clientHeight,
-          behavior: 'smooth'
+          behavior: "smooth",
         });
       }
     });
@@ -21,7 +22,7 @@ function useAutoScroll(isActive: boolean) {
     if (scrollContentRef.current) {
       resizeObserver.observe(scrollContentRef.current);
     }
-    
+
     return () => resizeObserver.disconnect();
   }, []);
 
@@ -32,10 +33,12 @@ function useAutoScroll(isActive: boolean) {
     }
 
     function onScroll() {
-      const { scrollHeight, clientHeight, scrollTop } = document.documentElement;
+      const { scrollHeight, clientHeight, scrollTop } =
+        document.documentElement;
       if (
         !isDisabled.current &&
-        prevScrollTop.current && window.scrollY < prevScrollTop.current &&
+        prevScrollTop.current &&
+        window.scrollY < prevScrollTop.current &&
         scrollHeight - clientHeight > scrollTop + SCROLL_THRESHOLD
       ) {
         isDisabled.current = true;
@@ -47,12 +50,12 @@ function useAutoScroll(isActive: boolean) {
       }
       prevScrollTop.current = window.scrollY;
     }
-    
+
     isDisabled.current = false;
     prevScrollTop.current = document.documentElement.scrollTop;
-    window.addEventListener('scroll', onScroll);
+    window.addEventListener("scroll", onScroll);
 
-    return () => window.removeEventListener('scroll', onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
   }, [isActive]);
 
   return scrollContentRef;

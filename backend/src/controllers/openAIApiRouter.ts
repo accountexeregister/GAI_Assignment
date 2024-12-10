@@ -3,7 +3,7 @@ import OpenAI from "openai";
 import faqData from "../../data/faq.json";
 
 const openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY,
+  apiKey: process.env.OPENAI_API_KEY,
 });
 
 const systemPrompt = `
@@ -23,26 +23,26 @@ Rules:
 const openAIApiRouter = express.Router();
 
 openAIApiRouter.post("/", async (req, res) => {
-    try {
-        const { message } = req.body;
-        const completion = await openai.chat.completions.create({
-            model: "gpt-4o-mini",
-            messages: [
-                {
-                    role: "system",
-                    content: systemPrompt,
-                },
-                {
-                    role: "user",
-                    content: message,
-                },
-            ]
-        });
+  try {
+    const { message } = req.body;
+    const completion = await openai.chat.completions.create({
+      model: "gpt-4o-mini",
+      messages: [
+        {
+          role: "system",
+          content: systemPrompt,
+        },
+        {
+          role: "user",
+          content: message,
+        },
+      ],
+    });
 
-        res.json({ message: completion.choices[0].message });
-    } catch (error) {
-        res.status(500).json({ error: "unknown prompt" });
-    }
+    res.json({ message: completion.choices[0].message });
+  } catch (error) {
+    res.status(500).json({ error: error });
+  }
 });
 
 export { openAIApiRouter };

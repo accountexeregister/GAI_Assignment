@@ -1,7 +1,6 @@
 export interface ChatMessage {
-    role: "user" | "assistant";
-    content: string;
-    sources?: any;
-    loading: boolean;
-    error?: boolean
+  role: "user" | "assistant";
+  content: string;
+  loading: boolean;
+  error?: boolean;
 }
