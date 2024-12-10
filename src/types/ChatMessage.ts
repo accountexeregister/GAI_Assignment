@@ -1,5 +1,7 @@
 export interface ChatMessage {
-    messenger: "user" | "chatbot";
+    role: "user" | "assistant";
     content: string;
+    sources?: any;
     loading: boolean;
+    error?: boolean
 }
