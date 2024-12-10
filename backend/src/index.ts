@@ -1,4 +1,5 @@
 import express, { Express, Request, Response } from "express";
+import cors from "cors";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -7,6 +8,7 @@ import { openAIApiRouter } from "./controllers/openAIApiRouter";
 const app: Express = express();
 const port = process.env.PORT || 3000;
 
+app.use(cors());
 app.use(express.static("build"));
 app.use(express.json());
 

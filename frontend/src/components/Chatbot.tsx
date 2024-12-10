@@ -3,6 +3,7 @@ import { useImmer } from 'use-immer';
 import { ChatMessages } from './ChatMessages';
 import { ChatMessageInput } from './ChatMessageInput';
 import { ChatMessage } from '../types/ChatMessage';
+import { sendMessageToAI } from '../ai-api';
 
 function Chatbot() {
 //   const [chatId, setChatId] = useState(null);
@@ -23,6 +24,23 @@ function Chatbot() {
         { role: 'assistant', content: '', sources: [], loading: true }
     ]);
     setNewMessage('');
+
+    try {
+      const response = await sendMessageToAI(trimmedMessage);
+      setMessages(draftMessage => {
+          draftMessage[draftMessage.length - 1].content = response.message.content;
+      });
+      setMessages(draft => {
+        draft[draft.length - 1].loading = false;
+      });
+    } catch (error) {
+      console.log(error);
+      setMessages(draftMessage => {
+          draftMessage[draftMessage.length - 1].error = false;
+          draftMessage[draftMessage.length - 1].error = true;
+      });
+    }
+
 
     // Send message to OpenAI API
     // Set messages from OpenAI API results
