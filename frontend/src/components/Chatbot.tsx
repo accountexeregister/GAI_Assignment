@@ -36,14 +36,10 @@ function Chatbot() {
     } catch (error) {
       console.log(error);
       setMessages(draftMessage => {
-          draftMessage[draftMessage.length - 1].error = false;
+          draftMessage[draftMessage.length - 1].loading = false;
           draftMessage[draftMessage.length - 1].error = true;
       });
     }
-
-
-    // Send message to OpenAI API
-    // Set messages from OpenAI API results
   }
 
   return (

@@ -12,7 +12,7 @@ async function sendMessageToAI(message: string): Promise<any> {
     if (!response.ok) {
         throw new Error(data.error);
     }
-    return data.body;
+    return data;
 }
 
 export { sendMessageToAI };
