@@ -2,6 +2,13 @@ import { useEffect, useLayoutEffect, useRef } from "react";
 
 const SCROLL_THRESHOLD = 10;
 
+/**
+ * Hook to automatically scroll to the bottom of the page when new content is added.
+ * When the user scrolls up, the auto-scrolling is disabled until the user scrolls back to the bottom.
+ *
+ * @param isActive - whether the auto-scrolling is active
+ * @returns a ref to the scrollable content
+ */
 function useAutoScroll(isActive: boolean) {
   const scrollContentRef = useRef(null);
   const isDisabled = useRef(false);

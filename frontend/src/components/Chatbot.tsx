@@ -18,12 +18,15 @@ function Chatbot() {
         setFaqs(faqs);
       } catch (error) {
         console.error(error);
+        // No need to display faqs buttons if fetching faqs failed
+        // Chatbot can still function without them
         setFaqs([]);
       }
     }
     setupFaqs();
   }, []);
 
+  // Check if the current message to render is still loading
   const isLoading =
     messages.length > 0 && !!messages[messages.length - 1].loading;
 
@@ -33,6 +36,8 @@ function Chatbot() {
       return;
     }
 
+    // When submitting a new message, the assistant message (chatbot) content will be empty as it is generating a response
+    // uuidv4() is used to generate a unique id for each message
     setMessages((draftMessage) => [
       ...draftMessage,
       { id: uuidv4(), role: "user", content: trimmedMessage },
@@ -86,7 +91,7 @@ function Chatbot() {
           </p>
         </div>
       )}
-      {/* Quick action buttons */}
+      {/* Quick action faq buttons for convenience*/}
       <div className="flex flex-wrap gap-4">
         {faqs.map((question, index) => (
           <button

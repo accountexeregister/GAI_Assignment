@@ -3,9 +3,11 @@ import OpenAI from "openai";
 import faqData from "../../data/faq.json";
 
 const openai = new OpenAI({
-  apiKey: "sk-1234567890abcdef1234567890abcdef",
+  apiKey: process.env.OPENAI_API_KEY,
 });
 
+// System prompt for the chatbot. Used to provide DeviceCare's customer support chatbot context, and to define its behaviour
+// Context is provided by using the FAQ data from JSON and feeding it to the chatbot
 const systemPrompt = `
 You are DeviceCare's customer support chatbot. Answer questions based on the following FAQs:
 ${faqData.map((faq, index) => `${index + 1}. Q: ${faq.question} A: ${faq.answer}`).join("\n")}
