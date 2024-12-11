@@ -29,7 +29,7 @@ An AI chatbot that acts as customer support for a product. It answers product-re
 - Set environment variable `PORT="<backend port>"`, where `"<backend port>"` is the port of the backend. The frontend will use this port to connect to the backend.
 - Install dependencies using `npm install`.
 - Build using `npm run build`.
-- Run the backend using `npm start`. The backend will run on http://localhost\:<PORT>, where \<PORT> is the value you set for the `PORT` environment variable.
+- Run the backend using `npm start`. The backend will run on localhost at port `<PORT>`, where `<PORT>` is the value you set for the `PORT` environment variable (e.g. http://localhost:3000 if `PORT=3000`).
 
 ### Frontend Setup and Run
 
