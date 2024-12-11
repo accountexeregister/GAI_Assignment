@@ -11,7 +11,7 @@ An AI chatbot that acts as customer support for a product. It answers product-re
 
 ## Technologies used
 
-**Frontend**: Node.js, TypeScript, React.js, Tailwind CSS
+**Frontend**: Node.js, TypeScript, React.js, Tailwind CSS  
 **Backend**: Node.js, TypeScript, Express.js, OpenAI API
 
 ## Requirements to run
@@ -23,7 +23,7 @@ An AI chatbot that acts as customer support for a product. It answers product-re
 
 ### Backend Setup and Run
 
-- Navigate to backend directory from the root of the repo (e.g. `cd backend`),
+- Navigate to backend directory from the root of the repo (e.g. `cd backend`).
 - Create `.env` file in the backend directory.
 - Set environment variable `OPENAI_API_KEY="<openai api key>"`, where `"<openai api key>"` must be a valid OpenAI API key.
 - Set environment variable `PORT="<backend port>"`, where `"<backend port>"` is the port of the backend. The frontend will use this port to connect to the backend.
@@ -35,10 +35,10 @@ An AI chatbot that acts as customer support for a product. It answers product-re
 
 - Navigate to frontend directory from the root of the repo (e.g. `cd frontend`).
 - Create `.env` file in the backend directory.
-- Set environment variable `VITE_BACKEND_BASE_URL="<backend url>"`, where `"<backend url>"` must be the backend's url (e.g. `VITE_BACKEND_BASE_URL="http://127.0.0.1:3000"`).
+- Set environment variable `VITE_BACKEND_BASE_URL="<backend url>"`, where `"<backend url>"` must be the backend's url (e.g. `VITE_BACKEND_BASE_URL=http://127.0.0.1:3000`).
 - Install dependencies using `npm install`.
 - Build using `npm run build`.
-- Run the backend using `npm start`. By default, it opens on http://localhost:4173
+- Run the backend using `npm start`. By default, it opens on http://localhost:4173.
 
 ## Documentation
 
