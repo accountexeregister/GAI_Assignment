@@ -1,20 +1,33 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useImmer } from "use-immer";
 import { ChatMessages } from "./ChatMessages";
 import { ChatMessageInput } from "./ChatMessageInput";
 import { ChatMessage } from "../types/ChatMessage";
-import { sendMessageToChatbot } from "../chatbotApi";
+import { sendMessageToChatbot, getFaqs } from "../chatbotApi";
 import { v4 as uuidv4 } from "uuid";
 
 function Chatbot() {
+  const [faqs, setFaqs] = useState<string[]>([]);
   const [messages, setMessages] = useImmer<ChatMessage[]>([]);
   const [newMessage, setNewMessage] = useState("");
+
+  useEffect(() => {
+    async function setupFaqs() {
+      try {
+        const faqs = await getFaqs();
+        setFaqs(faqs);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    setupFaqs();
+  });
 
   const isLoading =
     messages.length > 0 && !!messages[messages.length - 1].loading;
 
-  async function submitNewMessage() {
-    const trimmedMessage = newMessage.trim();
+  async function submitNewMessage(message: string) {
+    const trimmedMessage = message.trim();
     if (!trimmedMessage || isLoading) {
       return;
     }
@@ -24,7 +37,6 @@ function Chatbot() {
       { id: uuidv4(), role: "user", content: trimmedMessage },
       { id: uuidv4(), role: "assistant", content: "", loading: true },
     ]);
-    setNewMessage("");
 
     try {
       const response = await sendMessageToChatbot(trimmedMessage);
@@ -43,6 +55,15 @@ function Chatbot() {
     }
   }
 
+  async function submitTypedMessage() {
+    await submitNewMessage(newMessage);
+    setNewMessage("");
+  }
+
+  async function submitButtonMessage(question: string) {
+    await submitNewMessage(question);
+  }
+
   return (
     <div className="relative grow flex flex-col gap-6 pt-6">
       {messages.length === 0 && (
@@ -54,12 +75,24 @@ function Chatbot() {
           </p>
         </div>
       )}
+      {/* Quick action buttons */}
+      <div className="flex flex-wrap gap-4">
+        {faqs.map((question, index) => (
+          <button
+            key={index}
+            onClick={() => submitButtonMessage(question)}
+            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+          >
+            {question}
+          </button>
+        ))}
+      </div>
       <ChatMessages messages={messages} isLoading={isLoading} />
       <ChatMessageInput
         newMessage={newMessage}
         isLoading={isLoading}
         setNewMessage={setNewMessage}
-        submitNewMessage={submitNewMessage}
+        submitTypedMessage={submitTypedMessage}
       />
     </div>
   );

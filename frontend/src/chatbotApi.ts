@@ -20,4 +20,13 @@ async function sendMessageToChatbot(message: string): Promise<ChatbotResponse> {
   };
 }
 
-export { sendMessageToChatbot };
+async function getFaqs(): Promise<string[]> {
+  const response = await fetch(BACKEND_BASE_URL + "/api/chats/faqs");
+  const data = await response.json();
+  if (!response.ok) {
+    throw new Error(data.error);
+  }
+  return data.faqs;
+}
+
+export { sendMessageToChatbot, getFaqs };

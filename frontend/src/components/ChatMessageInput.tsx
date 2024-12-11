@@ -5,21 +5,21 @@ interface ChatMessageInput {
   newMessage: string;
   isLoading: boolean;
   setNewMessage: (newMessage: string) => void;
-  submitNewMessage: () => Promise<void>;
+  submitTypedMessage: () => Promise<void>;
 }
 
 function ChatMessageInput({
   newMessage,
   isLoading,
   setNewMessage,
-  submitNewMessage,
+  submitTypedMessage,
 }: ChatMessageInput) {
   const textareaRef = useAutosize(newMessage);
 
   function handleKeyDown(e: React.KeyboardEvent) {
     if (e.key === "Enter" && !e.shiftKey && !isLoading) {
       e.preventDefault();
-      submitNewMessage();
+      submitTypedMessage();
     }
   }
 
@@ -37,7 +37,7 @@ function ChatMessageInput({
           />
           <button
             className="absolute top-1/2 -translate-y-1/2 right-3 p-1 rounded-md hover:bg-primary-blue/20"
-            onClick={submitNewMessage}
+            onClick={submitTypedMessage}
           >
             <img src={sendIcon} alt="send" className="w-5 h-5" />
           </button>
