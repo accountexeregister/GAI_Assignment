@@ -14,7 +14,10 @@ async function sendMessageToAI(message: string): Promise<ChatbotResponse> {
   if (!response.ok) {
     throw new Error(data.error);
   }
-  return data;
+  return {
+    role: data.message.role,
+    content: data.message.content,
+  };
 }
 
 export { sendMessageToAI };

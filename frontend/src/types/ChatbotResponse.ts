@@ -1,5 +1,4 @@
-import { ChatMessage } from "./ChatMessage";
-
 export interface ChatbotResponse {
-  message: ChatMessage;
+  role: "user" | "assistant";
+  content: string;
 }

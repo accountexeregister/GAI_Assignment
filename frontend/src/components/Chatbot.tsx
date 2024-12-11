@@ -4,6 +4,7 @@ import { ChatMessages } from "./ChatMessages";
 import { ChatMessageInput } from "./ChatMessageInput";
 import { ChatMessage } from "../types/ChatMessage";
 import { sendMessageToAI } from "../ai-api";
+import { v4 as uuidv4 } from "uuid";
 
 function Chatbot() {
   const [messages, setMessages] = useImmer<ChatMessage[]>([]);
@@ -20,16 +21,15 @@ function Chatbot() {
 
     setMessages((draftMessage) => [
       ...draftMessage,
-      { role: "user", content: trimmedMessage },
-      { role: "assistant", content: "", loading: true },
+      { id: uuidv4(), role: "user", content: trimmedMessage },
+      { id: uuidv4(), role: "assistant", content: "", loading: true },
     ]);
     setNewMessage("");
 
     try {
       const response = await sendMessageToAI(trimmedMessage);
       setMessages((draftMessage) => {
-        draftMessage[draftMessage.length - 1].content =
-          response.message.content;
+        draftMessage[draftMessage.length - 1].content = response.content;
       });
       setMessages((draft) => {
         draft[draft.length - 1].loading = false;

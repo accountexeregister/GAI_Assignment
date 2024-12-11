@@ -15,9 +15,9 @@ function ChatMessages({ messages, isLoading }: ChatMessagesProps) {
 
   return (
     <div ref={scrollContentRef} className="grow space-y-4">
-      {messages.map(({ role, content, loading, error }, idx) => (
+      {messages.map(({ id, role, content, loading, error }) => (
         <div
-          key={idx}
+          key={id}
           className={`flex-1 items-start gap-4 py-4 px-3 rounded-xl break-words ${role === "user" ? "bg-primary-blue/10" : ""}`}
         >
           {role === "user" && (
