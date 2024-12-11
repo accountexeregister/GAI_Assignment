@@ -85,7 +85,9 @@ function Chatbot() {
     <div className="relative grow flex flex-col gap-6 pt-6">
       {messages.length === 0 && (
         <div className="mt-3 font-urbanist text-primary-blue text-xl font-light space-y-2">
-          <p>I am an AI Chatbot for DeviceCare's Frontline Customer Support.</p>
+          <p>
+            {"I am an AI Chatbot for DeviceCare's Frontline Customer Support."}
+          </p>
           <p>
             Feel free to ask me anything about the DeviceCare. I will try to
             answer as much as possible.

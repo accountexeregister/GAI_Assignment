@@ -12,7 +12,7 @@ export default [
   ...tseslint.configs.recommended,
   pluginReact.configs.flat.recommended,
   eslintPluginPrettierRecommended,
-  { ignores: ["node_modules/*"] },
+  { ignores: ["node_modules/*", "dist/*"] },
   {
     rules: {
       "react/jsx-uses-react": "off",

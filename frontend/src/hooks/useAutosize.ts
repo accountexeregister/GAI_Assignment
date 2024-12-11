@@ -14,7 +14,7 @@ function useAutosize(value: string): RefObject<HTMLTextAreaElement> {
     if (ref.current) {
       const style = window.getComputedStyle(ref.current);
       setBorderWidth(
-        parseFloat(style.borderTopWidth) + parseFloat(style.borderBottomWidth)
+        parseFloat(style.borderTopWidth) + parseFloat(style.borderBottomWidth),
       );
     }
   }, []);

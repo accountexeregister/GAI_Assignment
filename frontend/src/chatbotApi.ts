@@ -15,7 +15,7 @@ async function sendMessageToChatbot(message: string): Promise<ChatbotResponse> {
     let data;
     try {
       data = await response.json();
-    } catch (parseError) {
+    } catch {
       throw new Error("Unable to parse chatbot response. Please try again.");
     }
 
@@ -28,12 +28,12 @@ async function sendMessageToChatbot(message: string): Promise<ChatbotResponse> {
     // Handle network or other unexpected errors
     console.error(
       "Error occurred while sending the message to the chatbot:",
-      error
+      error,
     );
     throw new Error(
       error instanceof Error
         ? "Failed to send the message to the chatbot. The server might be down."
-        : "An unknown error occurred. Please try again later."
+        : "An unknown error occurred. Please try again later.",
     );
   }
 }
@@ -45,15 +45,15 @@ async function getFaqs(): Promise<string[]> {
     let data;
     try {
       data = await response.json();
-    } catch (parseError) {
+    } catch {
       throw new Error(
-        "Unable to parse the FAQs response. Please try again later."
+        "Unable to parse the FAQs response. Please try again later.",
       );
     }
 
     if (!response.ok) {
       throw new Error(
-        `Error ${response.status}: ${data.error || "Failed to fetch FAQs."}`
+        `Error ${response.status}: ${data.error || "Failed to fetch FAQs."}`,
       );
     }
 
@@ -67,7 +67,7 @@ async function getFaqs(): Promise<string[]> {
     throw new Error(
       error instanceof Error
         ? "Failed to fetch FAQs. The server might be down."
-        : "An unknown error occurred while fetching FAQs."
+        : "An unknown error occurred while fetching FAQs.",
     );
   }
 }
