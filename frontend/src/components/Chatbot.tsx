@@ -3,7 +3,7 @@ import { useImmer } from "use-immer";
 import { ChatMessages } from "./ChatMessages";
 import { ChatMessageInput } from "./ChatMessageInput";
 import { ChatMessage } from "../types/ChatMessage";
-import { sendMessageToAI } from "../ai-api";
+import { sendMessageToChatbot } from "../chatbotApi";
 import { v4 as uuidv4 } from "uuid";
 
 function Chatbot() {
@@ -27,7 +27,7 @@ function Chatbot() {
     setNewMessage("");
 
     try {
-      const response = await sendMessageToAI(trimmedMessage);
+      const response = await sendMessageToChatbot(trimmedMessage);
       setMessages((draftMessage) => {
         draftMessage[draftMessage.length - 1].content = response.content;
       });

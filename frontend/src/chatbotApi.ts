@@ -2,7 +2,7 @@ import { ChatbotResponse } from "./types/ChatbotResponse";
 
 const BACKEND_BASE_URL = import.meta.env.VITE_BASE_URL;
 
-async function sendMessageToAI(message: string): Promise<ChatbotResponse> {
+async function sendMessageToChatbot(message: string): Promise<ChatbotResponse> {
   const response = await fetch(BACKEND_BASE_URL + "/api/chats", {
     method: "POST",
     headers: {
@@ -20,4 +20,4 @@ async function sendMessageToAI(message: string): Promise<ChatbotResponse> {
   };
 }
 
-export { sendMessageToAI };
+export { sendMessageToChatbot };
