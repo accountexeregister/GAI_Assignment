@@ -12,13 +12,14 @@ function ChatMessages({ messages, isLoading }: ChatMessagesProps) {
 
   return (
     <div ref={scrollContentRef} className="grow space-y-4">
-      {messages.map(({ id, role, content, loading, error }) => (
+      {messages.map(({ id, role, content, loading, error, errorContent }) => (
         <ChatMessageView
           key={id}
           role={role}
           content={content}
           loading={loading}
           error={error}
+          errorContent={errorContent}
         />
       ))}
     </div>

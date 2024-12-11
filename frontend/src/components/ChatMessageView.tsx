@@ -8,9 +8,16 @@ interface ChatMessageProps {
   content: string;
   loading?: boolean;
   error?: boolean;
+  errorContent?: string;
 }
 
-function ChatMessageView({ role, content, loading, error }: ChatMessageProps) {
+function ChatMessageView({
+  role,
+  content,
+  loading,
+  error,
+  errorContent,
+}: ChatMessageProps) {
   return (
     <div
       style={{ overflowWrap: "anywhere" }}
@@ -34,7 +41,7 @@ function ChatMessageView({ role, content, loading, error }: ChatMessageProps) {
             className={`flex items-center gap-1 text-sm text-error-red ${content && "mt-2"}`}
           >
             <img className="h-5 w-5" src={errorIcon} alt="error" />
-            <span>Error generating the response</span>
+            <span>{errorContent}</span>
           </div>
         )}
       </div>

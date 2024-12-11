@@ -3,7 +3,7 @@ import OpenAI from "openai";
 import faqData from "../../data/faq.json";
 
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
+  apiKey: "sk-1234567890abcdef1234567890abcdef",
 });
 
 const systemPrompt = `
@@ -52,7 +52,51 @@ openAIApiRouter.post("/", async (req, res) => {
 
     res.json({ message: completion.choices[0].message });
   } catch (error) {
-    res.status(500).json({ error: error });
+    if (error instanceof OpenAI.APIError && error.status === 400) {
+      res.status(error.status).json({
+        error: `OpenAI API error occured due to invalid request: ${error.message}`,
+      });
+    } else if (error instanceof OpenAI.APIError && error.status === 401) {
+      res.status(error.status).json({
+        error:
+          "OpenAI API error occured due to authentication error with OpenAI API",
+      });
+    } else if (error instanceof OpenAI.APIError && error.status === 403) {
+      res.status(error.status).json({
+        error:
+          "OpenAI API error occured due to insufficient permissions to access the requested resource",
+      });
+    } else if (error instanceof OpenAI.APIError && error.status === 404) {
+      res.status(error.status).json({
+        error: "OpenAI API error occured due to resource not found",
+      });
+    } else if (error instanceof OpenAI.APIError && error.status === 422) {
+      res.status(error.status).json({
+        error:
+          "OpenAI API error occured due to request being unable to processed. This is unlikely to be your fault. Please try again.",
+      });
+    } else if (error instanceof OpenAI.APIError && error.status === 429) {
+      res.status(error.status).json({
+        error:
+          "OpenAI API error occured due to too many requests. Please try again later.",
+      });
+    } else if (
+      error instanceof OpenAI.APIError &&
+      error.status &&
+      error.status >= 500
+    ) {
+      res.status(error.status).json({
+        error: "OpenAI API error occured due to an internal server error",
+      });
+    } else if (error instanceof OpenAI.APIError) {
+      // APIConnectionError
+      res.status(500).json({
+        error:
+          "OpenAI API error occured due to error connecting with OpenAI API",
+      });
+    } else {
+      res.status(500).json({ error: "Internal server error" });
+    }
   }
 });
 

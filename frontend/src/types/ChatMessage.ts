@@ -4,4 +4,5 @@ export interface ChatMessage {
   content: string;
   loading?: boolean;
   error?: boolean;
+  errorContent?: string;
 }

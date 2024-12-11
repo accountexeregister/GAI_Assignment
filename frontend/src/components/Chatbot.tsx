@@ -17,11 +17,12 @@ function Chatbot() {
         const faqs = await getFaqs();
         setFaqs(faqs);
       } catch (error) {
-        console.log(error);
+        console.error(error);
+        setFaqs([]);
       }
     }
     setupFaqs();
-  });
+  }, []);
 
   const isLoading =
     messages.length > 0 && !!messages[messages.length - 1].loading;
@@ -47,7 +48,17 @@ function Chatbot() {
         draft[draft.length - 1].loading = false;
       });
     } catch (error) {
-      console.log(error);
+      console.error(error);
+      if (error instanceof Error) {
+        setMessages((draftMessage) => {
+          draftMessage[draftMessage.length - 1].errorContent = error.message;
+        });
+      } else {
+        setMessages((draftMessage) => {
+          draftMessage[draftMessage.length - 1].errorContent =
+            "An unknown error occurred. Please try again later.";
+        });
+      }
       setMessages((draftMessage) => {
         draftMessage[draftMessage.length - 1].loading = false;
         draftMessage[draftMessage.length - 1].error = true;
