@@ -32,7 +32,7 @@ async function sendMessageToChatbot(message: string): Promise<ChatbotResponse> {
     );
     throw new Error(
       error instanceof Error
-        ? error.message
+        ? "Failed to send the message to the chatbot. The server might be down."
         : "An unknown error occurred. Please try again later."
     );
   }
@@ -66,7 +66,7 @@ async function getFaqs(): Promise<string[]> {
     console.error("Error occurred while fetching FAQs:", error);
     throw new Error(
       error instanceof Error
-        ? error.message
+        ? "Failed to fetch FAQs. The server might be down."
         : "An unknown error occurred while fetching FAQs."
     );
   }
