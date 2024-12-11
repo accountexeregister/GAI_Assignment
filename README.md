@@ -35,10 +35,10 @@ An AI chatbot that acts as customer support for a product. It answers product-re
 
 - Navigate to frontend directory from the root of the repo (e.g. `cd frontend`).
 - Create `.env` file in the backend directory.
-- Set environment variable `VITE_BASE_URL="<backend url>"`, where `"<backend url>"` must be the backend's url (e.g. `VITE_BASE_URL="http://127.0.0.1:3000"`).
+- Set environment variable `VITE_BACKEND_BASE_URL="<backend url>"`, where `"<backend url>"` must be the backend's url (e.g. `VITE_BACKEND_BASE_URL="http://127.0.0.1:3000"`).
 - Install dependencies using `npm install`.
 - Build using `npm run build`.
-- Run the backend using `npm start`. By default, it opens on http://localhost:5173
+- Run the backend using `npm start`. By default, it opens on http://localhost:4173
 
 ## Documentation
 

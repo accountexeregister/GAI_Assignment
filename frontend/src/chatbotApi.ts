@@ -1,6 +1,6 @@
-import { ChatbotResponse } from "./types/ChatbotResponse";
+import { ChatbotResponse } from "./types/chat";
 
-const BACKEND_BASE_URL = import.meta.env.VITE_BASE_URL;
+const BACKEND_BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;
 
 async function sendMessageToChatbot(message: string): Promise<ChatbotResponse> {
   try {

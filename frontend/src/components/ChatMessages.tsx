@@ -1,5 +1,5 @@
 import { useAutoScroll } from "../hooks/useAutoScroll";
-import { ChatMessage } from "../types/ChatMessage";
+import { ChatMessage } from "../types/chat";
 import { ChatMessageView } from "./ChatMessageView";
 
 interface ChatMessagesProps {

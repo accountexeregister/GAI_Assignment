@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import { useImmer } from "use-immer";
 import { ChatMessages } from "./ChatMessages";
 import { ChatMessageInput } from "./ChatMessageInput";
-import { ChatMessage } from "../types/ChatMessage";
+import { ChatMessage } from "../types/chat";
 import { sendMessageToChatbot, getFaqs } from "../chatbotApi";
 import { v4 as uuidv4 } from "uuid";
+import { CHAT_ROLE_ASSISTANT, CHAT_ROLE_USER } from "../types/roles";
 
 function Chatbot() {
   const [faqs, setFaqs] = useState<string[]>([]);
@@ -40,8 +41,8 @@ function Chatbot() {
     // uuidv4() is used to generate a unique id for each message
     setMessages((draftMessage) => [
       ...draftMessage,
-      { id: uuidv4(), role: "user", content: trimmedMessage },
-      { id: uuidv4(), role: "assistant", content: "", loading: true },
+      { id: uuidv4(), role: CHAT_ROLE_USER, content: trimmedMessage },
+      { id: uuidv4(), role: CHAT_ROLE_ASSISTANT, content: "", loading: true },
     ]);
 
     try {
@@ -84,7 +85,7 @@ function Chatbot() {
     <div className="relative grow flex flex-col gap-6 pt-6">
       {messages.length === 0 && (
         <div className="mt-3 font-urbanist text-primary-blue text-xl font-light space-y-2">
-          <p>I am an AI Chatbot for Frontline Customer Support.</p>
+          <p>I am an AI Chatbot for DeviceCare's Frontline Customer Support.</p>
           <p>
             Feel free to ask me anything about the DeviceCare. I will try to
             answer as much as possible.
