@@ -1,6 +1,6 @@
 import Markdown from "react-markdown";
 import { Spinner } from "./Spinner";
-import userIcon from "../assets/images/user.jpg";
+import userIcon from "../assets/images/user.png";
 import errorIcon from "../assets/images/error.png";
 
 interface ChatMessageProps {
@@ -26,7 +26,7 @@ function ChatMessageView({ role, content, loading, error }: ChatMessageProps) {
           ) : role === "assistant" ? (
             <Markdown>{content}</Markdown>
           ) : (
-            <div className="whitespace-pre-line">{content}</div>
+            <div className="whitespace-pre-line text-left">{content}</div>
           )}
         </div>
         {error && (
