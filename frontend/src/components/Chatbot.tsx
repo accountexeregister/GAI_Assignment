@@ -6,15 +6,13 @@ import { ChatMessage } from "../types/ChatMessage";
 import { sendMessageToAI } from "../ai-api";
 
 function Chatbot() {
-  //   const [chatId, setChatId] = useState(null);
   const [messages, setMessages] = useImmer<ChatMessage[]>([]);
   const [newMessage, setNewMessage] = useState("");
 
   const isLoading =
-    messages.length > 0 && messages[messages.length - 1].loading;
+    messages.length > 0 && !!messages[messages.length - 1].loading;
 
   async function submitNewMessage() {
-    // Placeholder
     const trimmedMessage = newMessage.trim();
     if (!trimmedMessage || isLoading) {
       return;

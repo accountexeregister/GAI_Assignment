@@ -18,7 +18,7 @@ function ChatMessages({ messages, isLoading }: ChatMessagesProps) {
       {messages.map(({ role, content, loading, error }, idx) => (
         <div
           key={idx}
-          className={`flex items-start gap-4 py-4 px-3 rounded-xl ${role === "user" ? "bg-primary-blue/10" : ""}`}
+          className={`flex-1 items-start gap-4 py-4 px-3 rounded-xl break-words ${role === "user" ? "bg-primary-blue/10" : ""}`}
         >
           {role === "user" && (
             <img
